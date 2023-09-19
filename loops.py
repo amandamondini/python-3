@@ -48,6 +48,13 @@ for dog_breed in dog_breeds_available_for_adoption:
         print('They have the dog I want!')
         break
 
+# numbers will print until first integer that is divisible by 2 is reached (in this case it's 2)
+numbers = [1, 1, 2, 3]
+for number in numbers:
+    if number % 2 == 0:
+        break
+    print(number)
+
 #? Continue 
     # loop will continue based on a condition
     # will move onto the next element if condition isn't true 
@@ -74,3 +81,19 @@ for location in sales_data:
         scoops_sold += scoops
 
 print(scoops_sold)
+
+#? List Comprehensions
+# syntax example: new_list = [<expression> for <element> in <collection>]
+grades = [90, 88, 62, 76, 74, 89, 48, 57]
+scaled_grades = [grade +10 for grade in grades]
+print(scaled_grades)
+
+    # list comprehensions with conditionals 
+    # syntax [expression for item in iterable if condition]
+        # ex: even_numbers = [x for x in range(10) if x % 2 == 0]
+        # examples:
+        # numbers = [2, -1, 79, 33, -45]
+        # no_if   = [num * 2 for num in numbers]
+        # if_only = [num * 2 for num in numbers if num < 0]
+        # if_else = [num * 2 if num < 0 else num * 3 for num in numbers]
+            
