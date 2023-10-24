@@ -107,25 +107,69 @@ green&white;,;09/15/17,   Gail Phelps   ;,;$30.52
 
 #------------------------------------------------
 # Start coding below!
-# replaces ;,; with #
-daily_sales_replaced = daily_sales.replace(';,;', '#')
+# replaces ;,; with +
+daily_sales_replaced = daily_sales.replace(';,;', '+')
 
 #takes each string and puts it in a list seperated by a ,
 daily_transactions = daily_sales_replaced.split(',')
+#print(daily_transactions)
 
 # we want to take each transaction and put it in it's own list
 daily_transactions_split = []
 for transaction in daily_transactions:
-    item = transaction.split(',') #seperates out each transaction and assigns it to item and then we append it to the new list
+    item = transaction.split('+') #seperates out each transaction and assigns it to item and then we append it to the new list
     daily_transactions_split.append(item)
 
 #print(daily_transactions_split)
 
 transaction_clean = []
 for transaction in daily_transactions_split:
-    for item in transaction:
-        cleaned_item = item.strip()
-        transaction_clean.append(cleaned_item)
+    transaction_clean2 = []
+    for item in transaction: #each data point in the transaction
+        cleaned_item = item.replace("\n", "").strip(" ")
+        transaction_clean2.append(cleaned_item)
+        transaction_clean.append(transaction_clean2)
 
-print(transaction_clean)
 
+#print(transaction_clean)
+
+customers = []
+sales = []
+thread_sold = []
+
+#sorts each data point into their own lists
+for transaction in transaction_clean:
+    customers.append(transaction[0])
+    sales.append(transaction[1])
+    thread_sold.append(transaction[2])
+
+#print(customers)
+#print(sales)
+print(thread_sold)
+
+total_sales = 0
+
+for sale in sales:
+    total_sales += float(sale.strip('$'))
+
+print('Total Sales:', total_sales)
+
+thread_sold_split = []
+for sale in thread_sold:
+    for color in sale.split('&'):
+        thread_sold_split.append(color)
+
+def color_count(color):
+    color_total = 0
+    for thread_color in thread_sold_split:
+        if color == thread_color:
+            color_total += 1
+    return color_total
+
+#print(color_count('white'))
+
+colors = ['red', 'yellow', 'green', 'white', 'black', 'blue', 'purple']
+for color in colors:
+    print('Thread Shed sold {0} threads of {1} thread today'.format(color_count(color), color))
+    
+    
